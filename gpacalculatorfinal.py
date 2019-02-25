@@ -9,7 +9,7 @@ while not ans:
     except ValueError:
         ans = 0
         print("Please insert a realistic number.")
-# Using a while loop to stop whenever the user reached their class count
+# Using a for loop to stop whenever the user reached their class count
 gradeSum = 0
 for i in range(0, ans):
     # Asking user what grade they have for the class
@@ -21,6 +21,7 @@ for i in range(0, ans):
         else:
             grade_of_class = grade_of_class.upper()
             break
+# Calculate GPA
     numeric_grade_of_class = gradeDict[grade_of_class]
     gradeSum = gradeSum + numeric_grade_of_class
     GPA = gradeSum / ans
