@@ -28,7 +28,7 @@ def calc_new_gpa(class_pts, class_crd):
         complete = 0
         while not class_credit:
             try:
-                class_credit = int(input("Enter the credits for this class\n"))
+                class_credit = float(input("Enter the credits for this class\n"))
             except ValueError:
                 print("Please enter only numeric values")
                 class_credit = 0
@@ -58,18 +58,19 @@ def add_to_old_gpa():
     previous_credits = 0
     while not previous_points:
         try:
-            previous_points = int(input("Enter the previous amount of points\n"))
+            previous_points = float(input("Enter the previous amount of points\n"))
         except ValueError:
             print("Please enter only numeric values")
             previous_points = 0
 
     while not previous_credits:
         try:
-            previous_credits = int(input("Enter the previous amount of credits\n"))
+            previous_credits = float(input("Enter the previous amount of credits\n"))
         except ValueError:
             print("Please enter only numeric values")
             previous_credits = 0
     calc_new_gpa(previous_points, previous_credits)
+
 
 def main():
     usr_val = None
