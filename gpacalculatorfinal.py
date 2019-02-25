@@ -14,7 +14,7 @@ gradeSum = 0
 for i in range(0, ans):
     # Asking user what grade they have for the class
     while True:
-        grade_of_class = input("What is the letter grade of your first class?")
+        grade_of_class = input("What is the letter grade of your class?")
         if grade_of_class.lower() not in ('a', 'b', 'c', 'd', 'f'):
             print('You inserted an invalid letter grade, try again.')
             continue
