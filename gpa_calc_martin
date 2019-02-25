@@ -1,0 +1,98 @@
+
+def convert_grades_to_points(grade):
+    grades = {"A": 4, "a": 4, "B": 3, "b": 3, "C": 2, "c":2, "D": 1, "d": 1, "F": 0, "f": 0}
+    return grades[grade]
+
+
+def calc_new_gpa(class_pts, class_crd):
+    done_entering_classes = None
+    complete = None
+    class_points = class_pts
+    class_credit = 0
+    class_credits = class_crd
+    temp_points = 0
+
+    while not done_entering_classes:
+        while not complete:
+            try:
+                class_grade = input("Please enter the grade of the class\n")
+                if class_grade not in ("A", "a", "B", "b", "C", "c", "D", "d", "F", "f"):
+                    print("Not a valid letter grade.\nOnly A-D and F\n")
+                    raise ValueError
+                else:
+                    temp_points = convert_grades_to_points(class_grade)
+                    complete = 1
+            except ValueError:
+                class_grade = None
+
+        complete = 0
+        while not class_credit:
+            try:
+                class_credit = int(input("Enter the credits for this class\n"))
+            except ValueError:
+                print("Please enter only numeric values")
+                class_credit = 0
+        if class_points == 0:
+            class_points = class_credit * temp_points
+            class_credits += class_credit
+        else:
+            class_points += class_credit * temp_points
+            class_credits += class_credit
+        class_credit = 0
+
+        done_entering_classes = input("Do you want to add more classes, y/n?\n")
+        if done_entering_classes not in ("Y", "y"):
+            done_entering_classes = 1
+        else:
+            done_entering_classes = 0
+
+    print("Your GPA is: " + str(calc_gpa(class_points, class_credits)))
+
+
+def calc_gpa(grade_points, class_credits):
+    return grade_points / class_credits
+
+
+def add_to_old_gpa():
+    previous_points = 0
+    previous_credits = 0
+    while not previous_points:
+        try:
+            previous_points = int(input("Enter the previous amount of points\n"))
+        except ValueError:
+            print("Please enter only numeric values")
+            previous_points = 0
+
+    while not previous_credits:
+        try:
+            previous_credits = int(input("Enter the previous amount of credits\n"))
+        except ValueError:
+            print("Please enter only numeric values")
+            previous_credits = 0
+    calc_new_gpa(previous_points, previous_credits)
+
+def main():
+    usr_val = None
+    while not usr_val:
+        user_name = input("Hi, What is your name?\n")
+        try:
+            usr_val = int(input("Hi " + user_name + ", let's calculate your GPA, would you like to calculate a new GPA" +
+                                                    " or add to a " + "previous GPA?\n Please enter 1 for a new GPA, " +
+                                                    "or 2 for a previous GPA, or 3 to quit.\n"))
+            if usr_val not in (1, 2, 3):
+                raise ValueError
+        except ValueError:
+            usr_val = 0
+            print("That's not a valid response!")
+    if usr_val == 1:
+        print("Calculating a new GPA\n")
+        calc_new_gpa(0,0)
+    if usr_val == 2:
+        print("Adding to a previous GPA\n")
+        add_to_old_gpa()
+    if usr_val == 3:
+        print("Terminating...\n")
+
+
+if __name__ == "__main__":
+    main()
